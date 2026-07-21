@@ -5,6 +5,9 @@
 //  Created by Yacov Vladimirovich on 7/21/26.
 //  ooooo cool project awesome sauce
 
+
+// i have no idea how to commit properly...
+
 import SwiftUI
 
 struct ContentView: View {
