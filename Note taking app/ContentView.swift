@@ -3,7 +3,7 @@
 //  Note taking app
 //
 //  Created by Yacov Vladimirovich on 7/21/26.
-//
+//  ooooo cool project awesome sauce
 
 import SwiftUI
 
