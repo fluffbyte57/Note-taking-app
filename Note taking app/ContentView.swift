@@ -11,33 +11,70 @@
 import SwiftUI
 
 struct ContentView: View {
-    
+
     @State private var notes = ""
+    //.preferredColorScheme(darkMode? .dark : .light)
+    @State private var darkMode = false
     
     var body: some View {
+        //.preferredColorScheme(darkMode ? .dark : .light)
+        //preferredColorScheme(darkMode ? .dark : .light)
+        //preferredColorScheme(.dark)
         VStack{
             HStack{
                 Spacer()
-                Button{
-                    print("Goodbye world")
-                } label: {
-                    Image(systemName: "trash")
-                        .glassEffect()
-                        //.fixedSize(horizontal: 15, vertical: 15)
+                ZStack{
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(.ultraThinMaterial)
+                        .frame(width: 100 , height: 50)
+                    HStack(spacing: 10){
+                        Button{
+                            print("Goodbye world")
+                        } label: {
+                            Image(systemName: "trash")
+                                .glassEffect()
+                                .font(.system(size: 30))
+                        }
+                        Button{
+                            print("darkmode state: ", darkMode)
+                            darkMode.toggle()
+                            //print(darkMode)
+                            //dark | light mode switcher!!
+                        } label: {
+                            Image(systemName: "moon")
+                                .glassEffect()
+                                .font(.system(size: 35))
+                        }
+                    }
+
                 }
-                Spacer()
                 Text("Note taker")
-                    .font(.largeTitle)
+                    .font(.title)
                     .bold()
                     .italic()
                     .padding()
                 Spacer()
-                Button{
-                    print("Hello world")
-                } label: {
-                    Image(systemName: "plus")
-                        .glassEffect()
-                        //.frame(width:19, height:30)
+                ZStack{
+                    RoundedRectangle(cornerRadius: 30)
+                        .fill(.ultraThinMaterial)
+                        .frame(width: 100 , height: 50)
+                    HStack(spacing: 10){
+                        Button{
+                            print("Goodbye world")
+                        } label: {
+                            Image(systemName: "a")
+                                .glassEffect()
+                                .font(.system(size: 40))
+                        }
+                        Button{
+                            print("uh world? world")
+                        } label: {
+                            Image(systemName: "plus")
+                                .glassEffect()
+                                .font(.system(size: 40))
+                        }
+                    }
+
                 }
                 Spacer()
             }
@@ -47,8 +84,11 @@ struct ContentView: View {
         VStack{
             TextEditor(text: $notes)
                 .scrollContentBackground(.hidden)
+                .background(.ultraThinMaterial)
                 .frame(height: 550)
-                .background(.gray)
+                //.glassEffect(.regular)
+                //.background(.gray)
+                //.fill(.ultraThinMaterial)
                 //.glassEffect(.clear)
                 .cornerRadius(30)
                 .padding()
@@ -65,8 +105,9 @@ struct ContentView: View {
                 .frame(width: 350, height:100)
             //BOTTOM BAR RECENT NOTES
         }
-
+        .preferredColorScheme(darkMode ? .dark : .light)
     }
+
 }
 
 #Preview {
