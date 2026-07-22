@@ -12,13 +12,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>71</string>
+					<string>81</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>70</string>
+					<string>80</string>
 					<key>Timestamp</key>
-					<string>806401566.790192</string>
+					<string>806416420.554719</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -41,9 +41,9 @@
                         }
 </string>
 				<key>trailing</key>
-				<string>                            print("Cleared current text AND created a new note")
-                            notes = ""
-                            //temporarily just "clear" the current notes so that the user can write new notes
+				<string>                            //print("Cleared current text AND created a new note")
+                            print(currentnote, " is the current saved note")
+                            notes.append(currentnote)
 </string>
 			</dict>
 			<key>title</key>
@@ -59,13 +59,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>64</string>
+					<string>72</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>63</string>
+					<string>71</string>
 					<key>Timestamp</key>
-					<string>806401566.790361</string>
+					<string>806415637.454697</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -88,9 +88,9 @@
                     HStack(spacing: 10){
 </string>
 				<key>trailing</key>
-				<string>                            print("Placeholder")
-                        } label: {
-                            Image(systemName: "a")
+				<string>                            //print("Placeholder")
+                            print(notes)
+                            currentnote = notes[0]
 </string>
 			</dict>
 			<key>title</key>
@@ -106,13 +106,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>40</string>
+					<string>46</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>39</string>
+					<string>45</string>
 					<key>Timestamp</key>
-					<string>806401566.790354</string>
+					<string>806415637.454692</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -153,13 +153,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>31</string>
+					<string>37</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>30</string>
+					<string>36</string>
 					<key>Timestamp</key>
-					<string>806401238.16123</string>
+					<string>806415637.454641</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -183,12 +183,59 @@
 </string>
 				<key>trailing</key>
 				<string>                            print("Deleted the current note")
-                            notes = ""
+                            currentnote = ""
                                   // along with deleting current "note" and text in it, also show a text label as saying "no notes currently selected" and have it always be visible unless the TextEditor is overlaying it
 </string>
 			</dict>
 			<key>title</key>
 			<string>Delete notes button</string>
+			<key>type</key>
+			<string>bookmark</string>
+		</dict>
+		<dict>
+			<key>destination</key>
+			<dict>
+				<key>location-parameters</key>
+				<dict>
+					<key>EndingColumnNumber</key>
+					<string>0</string>
+					<key>EndingLineNumber</key>
+					<string>103</string>
+					<key>StartingColumnNumber</key>
+					<string>0</string>
+					<key>StartingLineNumber</key>
+					<string>102</string>
+					<key>Timestamp</key>
+					<string>806416420.554781</string>
+				</dict>
+				<key>rebasable-url</key>
+				<dict>
+					<key>base</key>
+					<string>workspace</string>
+					<key>payload</key>
+					<dict>
+						<key>relative-path</key>
+						<string>Note taking app/ContentView.swift</string>
+					</dict>
+				</dict>
+			</dict>
+			<key>text-context</key>
+			<dict>
+				<key>focused</key>
+				<string>            TextEditor(text: $currentnote)
+</string>
+				<key>leading</key>
+				<string>        
+        VStack{
+</string>
+				<key>trailing</key>
+				<string>                .scrollContentBackground(.hidden)
+                .background(.ultraThinMaterial)
+                .frame(height: 550)
+</string>
+			</dict>
+			<key>title</key>
+			<string>Text editor (main)</string>
 			<key>type</key>
 			<string>bookmark</string>
 		</dict>
