@@ -4,13 +4,13 @@
 
 #### Feature ideas for later:
 - ~~Dark / Light mode switcher~~
-- ~~~~~~Actually working note saving~~
+- ~~Actually working note saving~~
 - ~~New note making~~
 - ~~Delete current notes~~
-- Be able to rename old notes
+- ~~Be able to rename old notes~~
 - Share notes
 - ~~Make the system all together LESS confusing...~~
-- ~~~~~~~~Change font and allat
+- Change font and allat
 - organize my code....
 - *add images (suggested by friend)*
 - ~~Overwrite older notes~~
