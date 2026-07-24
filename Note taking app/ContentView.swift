@@ -23,6 +23,10 @@ struct ContentView: View {
 
     @State private var currentnote = ""
     @State private var currentNoteName = "Untitled Note"
+    @State private var newname = "empty name"
+    
+    @State private var showingRenamePrompt = false
+    
     @AppStorage("savedNotes") private var savedNotesData: Data = Data()
 
     @State private var notes: [Note] = []
@@ -32,6 +36,7 @@ struct ContentView: View {
     
     //.preferredColorScheme(darkMode? .dark : .light)
     @AppStorage("darkMode") private var darkMode = false
+        
     
     
     //////oooooo mysterious data saver AND loader //////
@@ -55,6 +60,7 @@ struct ContentView: View {
     ////////////////////////////////////////////////////
     
     var body: some View {
+        
         //.preferredColorScheme(darkMode ? .dark : .light)
         //preferredColorScheme(darkMode ? .dark : .light)
         //preferredColorScheme(.dark)
@@ -146,7 +152,7 @@ struct ContentView: View {
                         Button{
                             let newNote = Note(
                                 id: UUID(),
-                                name: "Untitled Note",
+                                name: "Unitled Note",
                                 text: currentnote
                             )
                             
@@ -185,14 +191,39 @@ struct ContentView: View {
                             } label: {
                                 Text(note.name)
                                 //i spent 30 minutes figuring out what tf was going on and i had the text set to note.text instead of note.name im so stupid
-                                    //.padding()
+                                //.padding()
                                     .lineLimit(1)
                                     .layoutPriority(1)
                                     .glassEffect(.clear)
                                     .font(.title)
                             }
+                            Button {
+                                //renaming button prompt
+                                //newname = currentNoteName
+                                showingRenamePrompt = true
+                            } label: {
+                                Text("Rename")
+                            }
+                            .alert("Rename Note", isPresented: $showingRenamePrompt) {
+                                TextField("New note name...", text: $newname)
+
+                                Button("Cancel", role: .cancel) { }
+
+                                Button("Rename") {
+                                    if let selectedNoteID,
+                                       let index = notes.firstIndex(where: { $0.id == selectedNoteID }) {
+
+                                        notes[index].name = newname
+                                        //currentNoteName = newname
+                                        saveNotes()
+                                    }
+                                }
+                            } message: {
+                                Text("Enter a new title for this note.")
+                            }
                         }
                     }
+                    
                 }
                 .frame(width: 400, height: 85)
                 //.background(.red)
