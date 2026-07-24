@@ -22,7 +22,7 @@ import SwiftUI
 struct ContentView: View {
 
     @State private var currentnote = ""
-    @State private var currentNoteName = ""
+    @State private var currentNoteName = "Untitled Note"
     @AppStorage("savedNotes") private var savedNotesData: Data = Data()
 
     @State private var notes: [Note] = []
@@ -117,10 +117,10 @@ struct ContentView: View {
 
                             if let selectedNoteID,
                                let index = notes.firstIndex(where: { $0.id == selectedNoteID }) {
-
+                                //currentNoteName = "UntitledNote"
                                 notes[index].text = currentnote
                                 notes[index].name = currentNoteName
-
+                                print("note saved " , notes[index].name)
                             } else {
                                 let newNote = Note(
                                     id: UUID(),
@@ -165,24 +165,7 @@ struct ContentView: View {
             //TOP AND TITLE HERE
         }
 
-        //for the record i effing hate this
-            VStack{
-                TextEditor(text: $currentnote)
-                //(notes, id: \.self){ note in
-                    .scrollContentBackground(.hidden)
-                    .background(.ultraThinMaterial)
-                    .frame(width: 420, height: 550)
-                    .font(.system(size: 30))
-                    //.glassEffect(.regular)
-                    //.background(.gray)
-                    //.fill(.ultraThinMaterial)
-                    //.glassEffect(.clear)
-                    .cornerRadius(30)
-                    .padding()
-                //Spacer()
-                //TEXT BOX
-            }
-        
+        noteeditor(notes: notes)
         
         VStack{
             Text("Recents")

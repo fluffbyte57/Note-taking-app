@@ -18,7 +18,7 @@
 					<key>StartingLineNumber</key>
 					<string>153</string>
 					<key>Timestamp</key>
-					<string>806605181.86984</string>
+					<string>806606096.54541</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -65,7 +65,7 @@
 					<key>StartingLineNumber</key>
 					<string>135</string>
 					<key>Timestamp</key>
-					<string>806605181.869885</string>
+					<string>806606096.545447</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -200,13 +200,13 @@
 					<key>EndingColumnNumber</key>
 					<string>0</string>
 					<key>EndingLineNumber</key>
-					<string>184</string>
+					<string>168</string>
 					<key>StartingColumnNumber</key>
 					<string>0</string>
 					<key>StartingLineNumber</key>
-					<string>183</string>
+					<string>167</string>
 					<key>Timestamp</key>
-					<string>806605181.869893</string>
+					<string>806606096.54544</string>
 				</dict>
 				<key>rebasable-url</key>
 				<dict>
@@ -222,16 +222,16 @@
 			<key>text-context</key>
 			<dict>
 				<key>focused</key>
-				<string>            }
+				<string>        noteeditor(notes: notes)
 </string>
 				<key>leading</key>
-				<string>                //Spacer()
-                //TEXT BOX
+				<string>        }
+
 </string>
 				<key>trailing</key>
 				<string>        
-        
         VStack{
+            Text("Recents")
 </string>
 			</dict>
 			<key>title</key>
