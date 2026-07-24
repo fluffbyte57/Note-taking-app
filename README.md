@@ -1,4 +1,4 @@
-# Note taker 3000
+# Note taker 3000 [UPDATE THE SAVE NOTE (NOT NEW NOTE) BUTTON IS BROKEN YAYYY]
 ##### Alright, let's cut to the cheese because the toast is getting hot.
 **The classic note taking project i saw many beginners do **and so thought to myself "hey, I'm a beginner", so i decided to make this:)
 
@@ -11,6 +11,9 @@
 - Share notes
 - Make the system all together LESS confusing...
 - ~~~~Change font and allat
+- organize my code....
+
+(P.S. I really want to organize my code but have NO idea how the hell i can make my variables become usable everywhere, ive used up at LEAST 2 hours trying to do something about it but nothing...)
 
 Anyways, wish me luck on my journey of learning this language which some call "*Swift*"
 

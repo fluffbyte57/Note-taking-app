@@ -5,6 +5,15 @@
 //  Created by Yacov Vladimirovich on 7/21/26.
 //  ooooo cool project awesome sauce
 
+// REMINDERSSSSSSSSS
+
+
+// name change button NEXT TO the name of a currently saved ntoe
+// overwrite saved notes, not create copies of em
+// date last edited next to a note
+// share a note OR AT LEAST FOR NOW copy paste the text
+
+///////////////////////////////////////////////////////
 
 // Nevermind now i know how to commit, i'm a genius
 
@@ -12,13 +21,14 @@ import SwiftUI
 
 struct ContentView: View {
 
-    @AppStorage("currentnote") private var currentnote = ""
+    @State private var currentnote = ""
+    @State private var currentNoteName = ""
     @AppStorage("savedNotes") private var savedNotesData: Data = Data()
-    @State private var notes: [String]  = [
-        "First note",
-        "Second note",
-        "DEv note"
-    ]
+
+    @State private var notes: [Note] = []
+    //@State private var selectednote: String = ""
+
+    @State private var selectedNoteID: UUID?
     
     //.preferredColorScheme(darkMode? .dark : .light)
     @AppStorage("darkMode") private var darkMode = false
@@ -34,12 +44,14 @@ struct ContentView: View {
     
     func loadNotes() {
         if let loadedNotes = try? JSONDecoder().decode(
-            [String].self,
-            from: savedNotesData
+            [Note].self,
+            from: savedNotesData,
         ) {
             notes = loadedNotes
         }
     }
+    
+    
     ////////////////////////////////////////////////////
     
     var body: some View {
@@ -55,13 +67,17 @@ struct ContentView: View {
                         .frame(width: 100 , height: 50)
                     HStack(spacing: 10){
                         Button{
-                            print("Deleted the current note")
+                           // print("Deleted the current note")
                             
-                            if let index = notes.firstIndex(of: currentnote) {
+                            if let selectedNoteID,
+                               let index = notes.firstIndex(where: {$0.id == selectedNoteID }) {
+                                print("remobing " , index)
                                 notes.remove(at: index)
                                 saveNotes()
+                                
                                 currentnote = ""
-                                //finds the CURRENT NOTE and DELETES IT
+                                currentNoteName = ""
+                                self.selectedNoteID = nil
                             }
                             
                             saveNotes()
@@ -98,17 +114,44 @@ struct ContentView: View {
                         .frame(width: 100 , height: 50)
                     HStack(spacing: 10){
                         Button{
-                            print("sharing note")
+
+                            if let selectedNoteID,
+                               let index = notes.firstIndex(where: { $0.id == selectedNoteID }) {
+
+                                notes[index].text = currentnote
+                                notes[index].name = currentNoteName
+
+                            } else {
+                                let newNote = Note(
+                                    id: UUID(),
+                                    name: currentNoteName,
+                                    text: currentnote
+                                )
+
+                                notes.append(newNote)
+                                selectedNoteID = newNote.id
+                            }
+
+                            saveNotes()
                             //ILL MAKE THIS THE SHARING BUTTON
                         } label: {
-                            Image(systemName: "paperplane")
+                            
+                            Image(systemName: "square.and.arrow.down")
                                 .glassEffect()
                                 .font(.system(size: 35))
+                            // note from database thats selected (selectednote)
+                            // whats in the text editor (currentnote)
+                            // the database (notes)
                         }
                         Button{
-                            notes.append(currentnote)
+                            let newNote = Note(
+                                id: UUID(),
+                                name: "Untitled Note",
+                                text: currentnote
+                            )
+                            
+                            notes.append(newNote)
                             saveNotes()
-                            currentnote = ""
                         } label: {
                             Image(systemName: "plus")
                                 .glassEffect()
@@ -121,22 +164,25 @@ struct ContentView: View {
             }
             //TOP AND TITLE HERE
         }
+
+        //for the record i effing hate this
+            VStack{
+                TextEditor(text: $currentnote)
+                //(notes, id: \.self){ note in
+                    .scrollContentBackground(.hidden)
+                    .background(.ultraThinMaterial)
+                    .frame(width: 420, height: 550)
+                    .font(.system(size: 30))
+                    //.glassEffect(.regular)
+                    //.background(.gray)
+                    //.fill(.ultraThinMaterial)
+                    //.glassEffect(.clear)
+                    .cornerRadius(30)
+                    .padding()
+                //Spacer()
+                //TEXT BOX
+            }
         
-        VStack{
-            TextEditor(text: $currentnote)
-                .scrollContentBackground(.hidden)
-                .background(.ultraThinMaterial)
-                .frame(width: 420, height: 550)
-                .font(.system(size: 30))
-                //.glassEffect(.regular)
-                //.background(.gray)
-                //.fill(.ultraThinMaterial)
-                //.glassEffect(.clear)
-                .cornerRadius(30)
-                .padding()
-            //Spacer()
-            //TEXT BOX
-        }
         
         VStack{
             Text("Recents")
@@ -147,12 +193,15 @@ struct ContentView: View {
                     .fill(.ultraThinMaterial)
                 ScrollView{
                     VStack(spacing: 5){
-                        ForEach(notes, id: \.self){ note in
+                        ForEach(notes){ note in
                             Button{
                                 print("loading note")
-                                currentnote = note
+                                currentnote = note.text
+                                currentNoteName = note.name
+                                selectedNoteID = note.id
                             } label: {
-                                Text(note)
+                                Text(note.name)
+                                //i spent 30 minutes figuring out what tf was going on and i had the text set to note.text instead of note.name im so stupid
                                     //.padding()
                                     .lineLimit(1)
                                     .layoutPriority(1)
